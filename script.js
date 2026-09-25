@@ -245,9 +245,20 @@ if (
             console.log("Quiz ferdig!");
             console.log(answers);
 
-            alert("Quiz fullført!");
+    // ===============================
+    // QUIZ FULLFØRT
+    // ===============================
 
-            // Senere kobler vi dette til matching-resultatene
+    const results = calculateMatches(answers);
+
+    // Lagre resultatene
+    sessionStorage.setItem(
+        "matchingResults",
+        JSON.stringify(results)
+    );
+
+    // Gå tilbake til profilsiden
+    window.location.href = "index.html";
         }
     });
 
@@ -268,4 +279,308 @@ if (
 
     // Starter quizzen
     showQuestion();
+}
+
+
+
+   // ===============================
+// BEREGN MATCHING
+// ===============================
+
+function calculateMatches(answers) {
+
+
+    // ===============================
+    // EKSEMPEL-PRAKSISPLASSER
+    // ===============================
+
+    const results = [
+
+        {
+            name: "Finanstilsynet",
+            line: "IT og teknologi",
+            location: "Oslo",
+            match: 70
+        },
+
+        {
+            name: "Forbrukerrådet",
+            line: "IT og teknologi",
+            location: "Oslo",
+            match: 70
+        },
+
+        {
+            name: "Elkjøp Nordic AS",
+            line: "Salg og kundeservice",
+            location: "Oslo",
+            match: 70
+        },
+
+        {
+            name: "Sopra Steria AS",
+            line: "IT og teknologi",
+            location: "Oslo",
+            match: 70
+        },
+
+        {
+            name: "Telia",
+            line: "IT og teknologi",
+            location: "Oslo",
+            match: 70
+        }
+
+    ];
+
+
+    // ===============================
+    // SPØRSMÅL 1
+    // INTERESSEOMRÅDE
+    // ===============================
+
+    if (answers[0] === "IT og teknologi") {
+
+        results[0].match += 20;
+
+        results[1].match += 15;
+
+        results[3].match += 15;
+
+        results[4].match += 10;
+
+    }
+
+
+    if (answers[0] === "Salg og kundeservice") {
+
+        results[2].match += 20;
+
+    }
+
+
+    // ===============================
+    // SPØRSMÅL 2
+    // HVA LIKER ELEVEN Å JOBBE MED?
+    // ===============================
+
+    if (answers[1] === "Data og teknologi") {
+
+        results[0].match += 10;
+
+        results[1].match += 10;
+
+        results[3].match += 10;
+
+    }
+
+
+    if (answers[1] === "Mennesker og kundekontakt") {
+
+        results[2].match += 10;
+
+    }
+
+
+    // ===============================
+    // SPØRSMÅL 3
+    // ARBEIDSMÅTE
+    // ===============================
+
+    if (answers[2] === "Sammen med andre") {
+
+        results[0].match += 5;
+
+        results[2].match += 5;
+
+    }
+
+
+    // ===============================
+    // SPØRSMÅL 4
+    // FERDIGHETER
+    // ===============================
+
+    if (answers[3] === "Tekniske ferdigheter") {
+
+        results[0].match += 5;
+
+        results[1].match += 5;
+
+        results[3].match += 5;
+
+    }
+
+
+    if (answers[3] === "Kommunikasjon") {
+
+        results[2].match += 5;
+
+    }
+
+
+    if (answers[3] === "Problemløsning") {
+
+        results[0].match += 5;
+
+        results[1].match += 5;
+
+    }
+
+
+    // ===============================
+    // SPØRSMÅL 6
+    // HVA ER VIKTIGST?
+    // ===============================
+
+    if (answers[5] === "Å lære nye ferdigheter") {
+
+        results[0].match += 5;
+
+        results[1].match += 5;
+
+        results[3].match += 5;
+
+    }
+
+
+    if (answers[5] === "Et godt arbeidsmiljø") {
+
+        results[2].match += 5;
+
+    }
+
+
+    // ===============================
+    // MAKS 99%
+    // ===============================
+
+    results.forEach(function (place) {
+
+        if (place.match > 99) {
+
+            place.match = 99;
+
+        }
+
+    });
+
+
+    // ===============================
+    // SORTER HØYEST MATCH FØRST
+    // ===============================
+
+    results.sort(function (a, b) {
+
+        return b.match - a.match;
+
+    });
+
+
+    return results;
+
+}
+
+
+// ===============================
+// VIS RESULTATER PÅ PROFILSIDE
+// ===============================
+
+const resultsContainer =
+    document.getElementById("resultsContainer");
+
+if (resultsContainer) {
+
+    const savedResults =
+        sessionStorage.getItem("matchingResults");
+
+
+    // Hvis quizzen nettopp er fullført
+    if (savedResults) {
+
+        const results =
+            JSON.parse(savedResults);
+
+        resultsContainer.innerHTML = "";
+
+
+        results.forEach(function (place) {
+
+            const resultCard =
+                document.createElement("div");
+
+            resultCard.classList.add("result-card");
+
+
+            resultCard.innerHTML = `
+
+                <div class="result-info">
+
+                    <h3>${place.name}</h3>
+
+                    <p class="result-line">
+                        ${place.line}
+                    </p>
+
+                    <p class="result-location">
+                        📍 ${place.location}
+                    </p>
+
+                </div>
+
+
+                <div class="match-info">
+
+                    <div class="match-text">
+
+                        <strong>
+                            ${place.match}%
+                        </strong>
+
+                        <span>
+                            match
+                        </span>
+
+                    </div>
+
+
+                    <div class="match-bar">
+
+                        <div
+                            class="match-progress"
+                            style="width: ${place.match}%">
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    class="read-more-button"
+                    onclick="alert('Mer informasjon om ${place.name}')">
+
+                    Les mer
+
+                </button>
+
+            `;
+
+            resultsContainer.appendChild(resultCard);
+
+        });
+
+
+        // Fjern resultatene etter at de er vist
+        // ved neste lasting av siden
+        sessionStorage.removeItem("matchingResults");
+
+
+    } else {
+
+        // Ingen quiz-resultater
+        resultsContainer.innerHTML = "";
+
+    }
+
 }
