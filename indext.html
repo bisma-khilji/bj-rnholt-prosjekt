@@ -3,11 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Bjørnholt matching app</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
+
 <body>
-    <h1>Vårt prosjekt</h1>
+
+    <header class="toppbar">
+        <button class="menu-button" id="menuButton">☰</button>
+        <h1>Min side</h1>
+    </header>
+
+    <nav class="side-menu" id="sideMenu">
+        <a href ="indext.html">Min Profil</a>
+        <a href="quizz.html">Matching quizz</a>
+        <a href="applications.html">Mine søknader</a>
+        <a href="#">Logg ut</a>
+    </nav>
+
+    <main class="dashboard">
+
+        <!-- PROFIL --> 
+         <section class="profile-card">
+
+            <div>
+                <h2>Hei elev!</h2>
+                <p>Her kan du administrere profilen din og finne relevante prasksisplasser</p>
+            </div>
+
+            <div class="profile-info">
+                <div>
+                    <h3>CV</h3>
+                    <p>CV.pdf</p>
+                    <button>Se CV</button>
+                </div>
+
+                <div>
+                    <h3>Mine ferdigheter</h3>
+                    <div class="skills">
+                        <span>IT</span>
+                        <span>kommunikasjon</span>
+                        <span>Problemløsning</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <button class="edit-button">Rediger profil</button>
+         </section>
+
+         <!-- MATCHING QUIZ -->
+          <section class="quiz-card">
+            <div>
+                <h2>Matching quiz</h2>
+                <p>Svar på noen spørsmål og få praksisplasser som 
+                    passer interessene og ferdighetene dine.
+                </p>
+            </div>
+            <a href="quizz.html" class="primary-button">
+                Ta quizz
+            </a>
+          </section>
+
+          <!-- RESULTATER -->
+          <section class="results-section">
+            <h2>Dine resultater</h2>
+        
+            <p class="results-description">
+                Praksisplasser som passer profilen og quizsvarene dine vises her.
+            </p>
+        
+            <div id="resultsContainer">
+                <!-- Resultatkort legges inn dynamisk her -->
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
 
 </body>
 </html>
