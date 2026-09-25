@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Matching quiz | Bjørnholt</title>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <!-- TOPPBAR -->
+    <header class="toppbar">
+        <button class="menu-button" id="menuButton">☰</button>
+        <h1>Matching quiz</h1>
+    </header>
+
+
+    <!-- HAMBURGERMENY -->
+    <nav class="side-menu" id="sideMenu">
+        <a href="index.html">Min profil</a>
+        <a href="quizz.html">Matching quiz</a>
+        <a href="applications.html">Mine søknader</a>
+        <a href="#">Logg ut</a>
+    </nav>
+
+
+    <!-- QUIZ -->
+    <main class="quiz-page">
+
+        <section class="quiz-container">
+
+            <div class="quiz-heading">
+                <p id="questionCounter">Spørsmål 1 av 8</p>
+
+                <div class="progress-bar">
+                    <div class="progress" id="progress"></div>
+                </div>
+            </div>
+
+
+            <div id="questionContainer">
+
+                <h2 id="question">
+                    Hvilket område interesserer deg mest?
+                </h2>
+
+                <div class="answer-options" id="answerOptions">
+
+                    <button class="answer-button" data-value="IT">
+                        IT og teknologi
+                    </button>
+
+                    <button class="answer-button" data-value="Salg">
+                        Salg og kundeservice
+                    </button>
+
+                    <button class="answer-button" data-value="Helse">
+                        Helse og omsorg
+                    </button>
+
+                    <button class="answer-button" data-value="Design">
+                        Design og kreativt arbeid
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="quiz-navigation">
+
+                <button id="previousButton" class="secondary-button" disabled>
+                    Tilbake
+                </button>
+
+                <button id="nextButton" class="primary-quiz-button">
+                    Neste
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>

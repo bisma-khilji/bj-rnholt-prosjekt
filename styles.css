@@ -293,3 +293,189 @@ button,
         text-align: center;
     }
 }
+/* ========================================
+   MATCHING QUIZ
+======================================== */
+
+.quiz-page {
+    width: 90%;
+    max-width: 850px;
+
+    margin: 50px auto;
+}
+
+.quiz-container {
+    background-color: #ffffff;
+
+    border: 1px solid #e1e7ef;
+    border-radius: 14px;
+
+    padding: 40px;
+
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* SPØRSMÅLSNUMMER */
+.quiz-heading {
+    margin-bottom: 35px;
+}
+
+#questionCounter {
+    color: #64748b;
+    font-size: 14px;
+
+    margin-bottom: 12px;
+}
+
+/* FREMGANGSLINJE */
+.progress-bar {
+    width: 100%;
+    height: 8px;
+
+    background-color: #e8edf3;
+
+    border-radius: 10px;
+
+    overflow: hidden;
+}
+
+.progress {
+    width: 12.5%;
+    height: 100%;
+
+    background-color: #4f7ca5;
+
+    border-radius: 10px;
+
+    transition: width 0.3s ease;
+}
+
+/* SPØRSMÅLET */
+#question {
+    color: #1f3b5b;
+
+    font-size: 25px;
+
+    margin-bottom: 30px;
+}
+
+/* SVARALTERNATIVER */
+.answer-options {
+    display: flex;
+    flex-direction: column;
+
+    gap: 14px;
+}
+
+.answer-button {
+    width: 100%;
+
+    text-align: left;
+
+    background-color: #f8fafc;
+    color: #334155;
+
+    border: 1px solid #dbe3ec;
+    border-radius: 10px;
+
+    padding: 18px;
+
+    font-size: 16px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.answer-button:hover {
+    background-color: #edf4fa;
+    border-color: #8caac4;
+}
+
+/* VALGT SVAR */
+.answer-button.selected {
+    background-color: #dcebf7;
+    border-color: #4f7ca5;
+    color: #234f73;
+}
+
+/* NAVIGASJON NEDERST */
+.quiz-navigation {
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-top: 40px;
+}
+
+/* TILBAKE */
+.secondary-button {
+    padding: 12px 20px;
+
+    background-color: #ffffff;
+
+    color: #4f6275;
+
+    border: 1px solid #cbd5e1;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    font-weight: 600;
+}
+
+.secondary-button:hover {
+    background-color: #f1f5f9;
+}
+
+.secondary-button:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+/* NESTE */
+.primary-quiz-button {
+    padding: 12px 24px;
+
+    background-color: #4f7ca5;
+
+    color: #ffffff;
+
+    border: none;
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    font-weight: 600;
+}
+
+.primary-quiz-button:hover {
+    background-color: #3f678c;
+}
+
+/* FRITEKST I QUIZ */
+
+.quiz-textarea {
+    width: 100%;
+    min-height: 150px;
+
+    padding: 16px;
+
+    border: 1px solid #dbe3ec;
+    border-radius: 10px;
+
+    background-color: #f8fafc;
+
+    font-family: inherit;
+    font-size: 16px;
+
+    resize: vertical;
+
+    outline: none;
+}
+
+.quiz-textarea:focus {
+    border-color: #4f7ca5;
+    background-color: #ffffff;
+}
