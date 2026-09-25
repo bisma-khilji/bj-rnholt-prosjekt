@@ -1,0 +1,295 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* HELE SIDEN */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f4f7fb;
+    color: #1f2937;
+    min-height: 100vh;
+}
+
+/* TOPPBAR */
+.toppbar {
+    height: 70px;
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 0 30px;
+    border-bottom: 1px solid #dbe3ec;
+}
+
+.toppbar h1 {
+    font-size: 24px;
+    color: #1f3b5b;
+}
+
+/* HAMBURGERKNAPP */
+.menu-button {
+    background-color: transparent;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: #1f3b5b;
+}
+
+.menu-button:hover {
+    color: #4f79a7;
+}
+
+/* SIDEMENY */
+.side-menu {
+    position: fixed;
+    top: 70px;
+    left: -260px;
+
+    width: 250px;
+    height: calc(100vh - 70px);
+
+    background-color: #ffffff;
+    border-right: 1px solid #dbe3ec;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 25px 15px;
+
+    transition: left 0.3s ease;
+
+    z-index: 1000;
+}
+
+/* Denne klassen legger vi til med JavaScript senere */
+.side-menu.open {
+    left: 0;
+}
+
+.side-menu a {
+    text-decoration: none;
+    color: #334155;
+    padding: 15px;
+    margin-bottom: 8px;
+
+    border-radius: 8px;
+
+    font-size: 16px;
+}
+
+.side-menu a:hover {
+    background-color: #eaf2f8;
+    color: #1f5f8b;
+}
+
+/* HOVEDINNHOLD */
+.dashboard {
+    width: 90%;
+    max-width: 1100px;
+
+    margin: 40px auto;
+
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+/* FELLES KORTSTIL */
+.profile-card,
+.quiz-card,
+.results-section {
+    background-color: #ffffff;
+
+    border: 1px solid #e1e7ef;
+    border-radius: 14px;
+
+    padding: 28px;
+
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* PROFIL */
+.profile-card h2 {
+    color: #1f3b5b;
+    margin-bottom: 8px;
+}
+
+.profile-card p {
+    color: #64748b;
+    line-height: 1.6;
+}
+
+/* CV + FERDIGHETER */
+.profile-info {
+    display: flex;
+    gap: 30px;
+
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.profile-info > div {
+    flex: 1;
+
+    background-color: #f8fafc;
+    border-radius: 10px;
+
+    padding: 20px;
+}
+
+.profile-info h3 {
+    margin-bottom: 12px;
+    color: #334155;
+}
+
+/* FERDIGHETER */
+.skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.skills span {
+    background-color: #e3eef8;
+    color: #315f86;
+
+    padding: 8px 12px;
+
+    border-radius: 20px;
+
+    font-size: 14px;
+}
+
+/* KNAPPER */
+button,
+.primary-button {
+    font-family: inherit;
+}
+
+/* SE CV-KNAPP */
+.profile-info button {
+    margin-top: 12px;
+
+    background-color: #ffffff;
+    color: #315f86;
+
+    border: 1px solid #8caac4;
+    border-radius: 8px;
+
+    padding: 9px 14px;
+
+    cursor: pointer;
+}
+
+.profile-info button:hover {
+    background-color: #edf4fa;
+}
+
+/* REDIGER PROFIL */
+.edit-button {
+    background-color: #dcebf7;
+    color: #24557c;
+
+    border: none;
+    border-radius: 8px;
+
+    padding: 11px 18px;
+
+    cursor: pointer;
+
+    font-weight: 600;
+}
+
+.edit-button:hover {
+    background-color: #c8deee;
+}
+
+/* QUIZ-KORT */
+.quiz-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 30px;
+}
+
+.quiz-card h2 {
+    color: #1f3b5b;
+    margin-bottom: 8px;
+}
+
+.quiz-card p {
+    color: #64748b;
+    line-height: 1.6;
+    max-width: 650px;
+}
+
+/* HOVEDKNAPP */
+.primary-button {
+    display: inline-block;
+
+    text-decoration: none;
+
+    background-color: #4f7ca5;
+    color: #ffffff;
+
+    padding: 12px 20px;
+
+    border-radius: 8px;
+
+    font-weight: 600;
+
+    transition: background-color 0.2s ease;
+}
+
+.primary-button:hover {
+    background-color: #3f678c;
+}
+
+/* RESULTATER */
+.results-section h2 {
+    color: #1f3b5b;
+    margin-bottom: 8px;
+}
+
+.results-description {
+    color: #64748b;
+    margin-bottom: 20px;
+}
+
+/* TOM RESULTAT-CONTAINER */
+#resultsContainer {
+    min-height: 80px;
+
+    background-color: #f8fafc;
+
+    border: 1px dashed #cbd5e1;
+    border-radius: 10px;
+
+    padding: 20px;
+}
+
+/* RESPONSIVITET */
+@media (max-width: 800px) {
+
+    .dashboard {
+        width: 94%;
+    }
+
+    .profile-info {
+        flex-direction: column;
+    }
+
+    .quiz-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .primary-button {
+        width: 100%;
+        text-align: center;
+    }
+}
