@@ -594,5 +594,224 @@ button,
     padding: 20px;
     border-radius: 10px;
 }
+/* ========================================
+   MINE SØKNADER
+======================================== */
 
+.applications-page {
+    width: 90%;
+    max-width: 1100px;
+
+    margin: 40px auto;
+}
+
+
+/* OVERSKRIFT */
+
+.applications-header {
+    margin-bottom: 30px;
+}
+
+.applications-header h2 {
+    color: #1f3b5b;
+    margin-bottom: 8px;
+}
+
+.applications-header p {
+    color: #64748b;
+    line-height: 1.6;
+}
+
+
+/* OPPSUMMERING */
+
+.application-summary {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 18px;
+
+    margin-bottom: 30px;
+}
+
+.summary-card {
+    background-color: #ffffff;
+
+    border: 1px solid #e1e7ef;
+    border-radius: 12px;
+
+    padding: 22px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 6px;
+
+    color: #64748b;
+
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.04);
+}
+
+.summary-number {
+    font-size: 28px;
+    font-weight: bold;
+
+    color: #1f3b5b;
+}
+
+
+/* LISTE MED SØKNADER */
+
+.applications-list {
+    display: flex;
+    flex-direction: column;
+
+    gap: 16px;
+}
+
+
+/* SØKNADSKORT */
+
+.application-card {
+    background-color: #ffffff;
+
+    border: 1px solid #e1e7ef;
+    border-radius: 12px;
+
+    padding: 22px;
+
+    display: grid;
+
+    grid-template-columns: 1fr 180px 130px;
+
+    gap: 25px;
+
+    align-items: center;
+
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.04);
+}
+
+
+/* INFORMASJON */
+
+.application-info h3 {
+    color: #1f3b5b;
+
+    margin-bottom: 8px;
+
+    font-size: 20px;
+}
+
+.application-field {
+    font-weight: 600;
+
+    color: #334155;
+
+    margin-bottom: 6px;
+}
+
+.application-location {
+    color: #64748b;
+
+    margin-bottom: 6px;
+}
+
+.application-date {
+    color: #94a3b8;
+
+    font-size: 14px;
+}
+
+
+/* STATUS */
+
+.application-status {
+    padding: 9px 14px;
+
+    border-radius: 20px;
+
+    text-align: center;
+
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+
+/* UNDER VURDERING */
+
+.status-review {
+    background-color: #fff4d6;
+    color: #946200;
+}
+
+
+/* INTERVJU */
+
+.status-interview {
+    background-color: #dcebf7;
+    color: #24557c;
+}
+
+
+/* TILBUD */
+
+.status-offer {
+    background-color: #dcfce7;
+    color: #166534;
+}
+
+
+/* AVSLAG */
+
+.status-rejected {
+    background-color: #fee2e2;
+    color: #991b1b;
+}
+
+
+/* KNAPP */
+
+.application-button {
+    background-color: #ffffff;
+
+    color: #315f86;
+
+    border: 1px solid #8caac4;
+    border-radius: 8px;
+
+    padding: 10px 15px;
+
+    cursor: pointer;
+
+    font-weight: 600;
+}
+
+.application-button:hover {
+    background-color: #edf4fa;
+}
+
+
+/* RESPONSIV */
+
+@media (max-width: 800px) {
+
+    .application-summary {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .application-card {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .application-status {
+        width: fit-content;
+    }
+
+    .application-button {
+        width: 100%;
+    }
+}
 

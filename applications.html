@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mine søknader | Bjørnholt</title>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <!-- TOPPBAR -->
+    <header class="toppbar">
+        <button class="menu-button" id="menuButton">☰</button>
+        <h1>Mine søknader</h1>
+    </header>
+
+
+    <!-- SIDEMENY -->
+    <nav class="side-menu" id="sideMenu">
+        <a href="index.html">Min profil</a>
+        <a href="quizz.html">Matching quiz</a>
+        <a href="applications.html">Mine søknader</a>
+        <a href="#">Logg ut</a>
+    </nav>
+
+
+    <!-- HOVEDINNHOLD -->
+    <main class="applications-page">
+
+        <section class="applications-header">
+            <h2>Mine søknader</h2>
+
+            <p>
+                Her kan du se praksisplassene du har søkt på
+                og følge statusen på søknadene dine.
+            </p>
+        </section>
+
+
+        <!-- OVERSIKT -->
+        <section class="application-summary">
+
+            <div class="summary-card">
+                <span class="summary-number">4</span>
+                <span>Totalt søkt</span>
+            </div>
+
+            <div class="summary-card">
+                <span class="summary-number">2</span>
+                <span>Under vurdering</span>
+            </div>
+
+            <div class="summary-card">
+                <span class="summary-number">1</span>
+                <span>Intervju</span>
+            </div>
+
+            <div class="summary-card">
+                <span class="summary-number">1</span>
+                <span>Svar mottatt</span>
+            </div>
+
+        </section>
+
+
+        <!-- SØKNADER -->
+        <section class="applications-list">
+
+            <!-- SØKNAD 1 -->
+            <article class="application-card">
+
+                <div class="application-info">
+                    <h3>Sopra Steria AS</h3>
+
+                    <p class="application-field">
+                        IT og teknologi
+                    </p>
+
+                    <p class="application-location">
+                        📍 Oslo
+                    </p>
+
+                    <p class="application-date">
+                        Søkt: 20. september 2026
+                    </p>
+                </div>
+
+
+                <div class="application-status status-review">
+                    Under vurdering
+                </div>
+
+
+                <button class="application-button">
+                    Se søknad
+                </button>
+
+            </article>
+
+
+            <!-- SØKNAD 2 -->
+            <article class="application-card">
+
+                <div class="application-info">
+                    <h3>Finanstilsynet</h3>
+
+                    <p class="application-field">
+                        IT og teknologi
+                    </p>
+
+                    <p class="application-location">
+                        📍 Oslo
+                    </p>
+
+                    <p class="application-date">
+                        Søkt: 18. september 2026
+                    </p>
+                </div>
+
+
+                <div class="application-status status-interview">
+                    Intervju
+                </div>
+
+
+                <button class="application-button">
+                    Se søknad
+                </button>
+
+            </article>
+
+
+            <!-- SØKNAD 3 -->
+            <article class="application-card">
+
+                <div class="application-info">
+                    <h3>Elkjøp Nordic AS</h3>
+
+                    <p class="application-field">
+                        Salg og kundeservice
+                    </p>
+
+                    <p class="application-location">
+                        📍 Oslo
+                    </p>
+
+                    <p class="application-date">
+                        Søkt: 12. september 2026
+                    </p>
+                </div>
+
+
+                <div class="application-status status-review">
+                    Under vurdering
+                </div>
+
+
+                <button class="application-button">
+                    Se søknad
+                </button>
+
+            </article>
+
+
+            <!-- SØKNAD 4 -->
+            <article class="application-card">
+
+                <div class="application-info">
+                    <h3>Telia</h3>
+
+                    <p class="application-field">
+                        IT og teknologi
+                    </p>
+
+                    <p class="application-location">
+                        📍 Oslo
+                    </p>
+
+                    <p class="application-date">
+                        Søkt: 5. september 2026
+                    </p>
+                </div>
+
+
+                <div class="application-status status-rejected">
+                    Avslag
+                </div>
+
+
+                <button class="application-button">
+                    Se søknad
+                </button>
+
+            </article>
+
+        </section>
+
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
