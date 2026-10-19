@@ -522,3 +522,49 @@ button, .primary-button { font-family: inherit; }
 
     .application-status { width: fit-content; }
 }
+.contact-button {
+    display: inline-block;
+    padding: 12px 18px;
+    background-color: #e7f1ff;
+    color: #163b65;
+    border: 2px solid #b8d4f2;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.contact-button:hover {
+    background-color: #d5e7ff;
+}
+
+.result-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 15px;
+}
+
+/* Informasjon under quizspørsmål */
+
+.answer-instruction {
+    color: #356fa8;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 10px 0 20px;
+}
+
+/* Markert svaralternativ */
+
+.answer-button.selected {
+    background-color: #e7f1ff;
+    border: 2px solid #163b65;
+    color: #163b65;
+    font-weight: bold;
+}
+
+/* Tastaturnavigasjon */
+
+.answer-button:focus-visible {
+    outline: 3px solid #163b65;
+    outline-offset: 3px;
+}
