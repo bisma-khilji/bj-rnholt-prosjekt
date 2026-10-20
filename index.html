@@ -3,37 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+ 
     <title>Bjørnholt matching app</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-
-
+ 
+ 
 <body>
-
+ 
     <header class="toppbar">
         <button class="menu-button" id="menuButton">☰</button>
         <h1>Min side</h1>
     </header>
-
+ 
     <nav class="side-menu" id="sideMenu">
         <a href="index.html">🏠 Min side</a>
         <a href="quiz.html">🎯 Matching quiz</a>
-        <a href="soknader.html">📄 Mine søknader</a>
+        <a href="applications.html">📄 Mine søknader</a>
         <a href="messages.html">💬 Meldinger</a>
         <a href="#">🚪 Logg ut</a>
     </nav>
-
+ 
     <main class="dashboard">
-
-        <!-- PROFIL --> 
+ 
+        <!-- PROFIL -->
          <section class="profile-card">
-
+ 
             <div>
                 <h2>Hei elev!</h2>
                 <p>Her kan du administrere profilen din og finne relevante prasksisplasser</p>
             </div>
-
+ 
             <div class="profile-info">
                 <div>
                     <h3>CV</h3>
@@ -41,6 +41,16 @@
                     <button>Se CV</button>
                 </div>
 
+                <div>
+                    <h3>Søknad</h3>
+                    <p>Trenger du hjelp med søknaden?</p>
+                    <p>
+                    <a href="eksempel-soknad.html">
+                    Søknadtips - for å skrive en god søknad
+                    </a>
+                    <button>Se søknad</button>
+                </div>
+ 
                 <div>
                     <h3>Mine ferdigheter</h3>
                     <div class="skills">
@@ -50,47 +60,47 @@
                         <span>Kommunisere</span>
                     </div>
                 </div>
-
+ 
             </div>
-
+ 
             <button class="edit-button">Rediger profil</button>
          </section>
-
+ 
          <!-- MATCHING QUIZ -->
          <section class="quiz-highlight">
             <div class="quiz-icon">🎯</div>
-        
+       
             <div class="quiz-highlight-text">
                 <span class="small-label">FINN DIN MATCH</span>
-        
+       
                 <h2>Hva passer for deg?</h2>
-        
+       
                 <p>
                     Svar på noen korte spørsmål om interesser,
                     ferdigheter og hva du ønsker å jobbe med.
                 </p>
-        
+       
                 <a href="quiz.html" class="quiz-main-button">
                     Start matching-quiz →
                 </a>
             </div>
         </section>
-
+ 
           <!-- RESULTATER -->
           <section class="results-section">
             <h2>Dine resultater</h2>
-        
+       
             <p class="results-description">
                 Praksisplasser som passer profilen og quizsvarene dine vises her.
             </p>
-        
+       
             <div id="resultsContainer">
                 <!-- Resultatkort legges inn dynamisk her -->
             </div>
         </section>
     </main>
-
+ 
     <script src="script.js"></script>
-
+ 
 </body>
 </html>
