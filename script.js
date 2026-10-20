@@ -493,82 +493,88 @@ if (resultsContainer) {
 
     const savedResults =
         sessionStorage.getItem("matchingResults");
+        
+        // Hvis quizzen nettopp er fullført
 
+if (savedResults) {
 
-    // Hvis quizzen nettopp er fullført
-    if (savedResults) {
+    const results = JSON.parse(savedResults);
 
-        const results =
-            JSON.parse(savedResults);
+    resultsContainer.innerHTML = "";
 
-        resultsContainer.innerHTML = "";
+    results.forEach(function (place) {
 
+        const resultCard = document.createElement("div");
 
-        results.forEach(function (place) {
+        resultCard.classList.add("result-card");
 
-            const resultCard =
-                document.createElement("div");
+        resultCard.innerHTML = `
 
-            resultCard.classList.add("result-card");
+            <div class="result-top">
 
+                <span class="type-badge praksis">
+                    🎓 Praksisplass
+                </span>
 
-            resultCard.innerHTML = `
+                <span class="match-badge">
+                    ${place.match}% match
+                </span>
 
-                <div class="result-info">
+            </div>
 
-                    <h3>${place.name}</h3>
+            <div class="result-info">
 
-                    <p class="result-line">
-                        ${place.line}
-                    </p>
+                <h3>${place.name}</h3>
 
-                    <p class="result-location">
-                        📍 ${place.location}
-                    </p>
+                <p class="result-line">
+                    ${place.line}
+                </p>
 
+                <p class="result-location">
+                    📍 ${place.location}
+                </p>
+
+            </div>
+
+            <div class="match-info">
+
+                <div class="match-text">
+                    <strong>${place.match}%</strong>
+                    <span>match</span>
                 </div>
 
-
-                <div class="match-info">
-
-                    <div class="match-text">
-
-                        <strong>
-                            ${place.match}%
-                        </strong>
-
-                        <span>
-                            match
-                        </span>
-
+                <div class="match-bar">
+                    <div
+                        class="match-progress"
+                        style="width: ${place.match}%">
                     </div>
-
-
-                    <div class="match-bar">
-
-                        <div
-                            class="match-progress"
-                            style="width: ${place.match}%">
-                        </div>
-
-                    </div>
-
                 </div>
 
+            </div>
+
+            <div class="result-actions">
 
                 <button
                     class="read-more-button"
                     onclick="alert('Mer informasjon om ${place.name}')">
 
-                    Utdanning.no
+                    Les mer
 
                 </button>
 
-            `;
+                <a href="messages.html" class="contact-button">
+                    💬 Kontakt bedriften
+                </a>
 
-            resultsContainer.appendChild(resultCard);
+            </div>
 
-        });
+        `;
+
+        resultsContainer.appendChild(resultCard);
+
+    });
+
+}
 
 
         // Fjern resultatene etter at de er vist

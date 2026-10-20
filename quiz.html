@@ -14,16 +14,17 @@
     <!-- TOPPBAR -->
     <header class="toppbar">
         <button class="menu-button" id="menuButton">☰</button>
-        <h1>Matching quiz</h1>
+        <h1>Matching quiz 🎯</h1>
     </header>
 
 
     <!-- HAMBURGERMENY -->
     <nav class="side-menu" id="sideMenu">
-        <a href="index.html">Min profil</a>
-        <a href="quizz.html">Matching quiz</a>
-        <a href="applications.html">Mine søknader</a>
-        <a href="#">Logg ut</a>
+        <a href="index.html">🏠 Min profil</a>
+        <a href="quizz.html">🎯 Matching quiz</a>
+        <a href="applications.html">📄 Mine søknader</a>
+        <a href="messages.html">💬 Meldinger</a>
+        <a href="#">🚪 Logg ut</a>
     </nav>
 
 
@@ -33,11 +34,15 @@
         <section class="quiz-container">
 
             <div class="quiz-heading">
-                <p id="questionCounter">Spørsmål 1 av 8</p>
+
+                <p id="questionCounter">
+                    Spørsmål 1 av 8
+                </p>
 
                 <div class="progress-bar">
                     <div class="progress" id="progress"></div>
                 </div>
+
             </div>
 
 
@@ -47,22 +52,28 @@
                     Hvilket område interesserer deg mest?
                 </h2>
 
+                <!-- NYTT: Informasjon om svaralternativer -->
+                <p id="answerInstruction" class="answer-instruction">
+                    Velg én eller flere alternativer
+                </p>
+
+
                 <div class="answer-options" id="answerOptions">
 
-                    <button class="answer-button" data-value="IT">
-                        IT og teknologi
+                    <button type="button" class="answer-button" data-value="IT">
+                        💻 IT og teknologi
                     </button>
 
-                    <button class="answer-button" data-value="Salg">
-                        Salg og kundeservice
+                    <button type="button" class="answer-button" data-value="Salg">
+                        🛍️ Salg og kundeservice
                     </button>
 
-                    <button class="answer-button" data-value="Helse">
-                        Helse og omsorg
+                    <button type="button" class="answer-button" data-value="Helse">
+                        ❤️ Helse og omsorg
                     </button>
 
-                    <button class="answer-button" data-value="Design">
-                        Design og kreativt arbeid
+                    <button type="button" class="answer-button" data-value="Design">
+                        🎨 Design og kreativt arbeid
                     </button>
 
                 </div>
@@ -72,12 +83,19 @@
 
             <div class="quiz-navigation">
 
-                <button id="previousButton" class="secondary-button" disabled>
-                    Tilbake
+                <button
+                    type="button"
+                    id="previousButton"
+                    class="secondary-button"
+                    disabled>
+                    ← Tilbake
                 </button>
 
-                <button id="nextButton" class="primary-quiz-button">
-                    Neste
+                <button
+                    type="button"
+                    id="nextButton"
+                    class="primary-quiz-button">
+                    Neste →
                 </button>
 
             </div>
