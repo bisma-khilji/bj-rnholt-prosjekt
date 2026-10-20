@@ -1,3 +1,4 @@
+
 // ===============================
 // HAMBURGERMENY
 // ===============================
@@ -19,7 +20,7 @@ if (menuButton && sideMenu) {
 const questions = [
     {
         question: "Hvilket område interesserer deg mest?",
-        type: "options",
+        type: "multiple",
         options: [
             "IT og teknologi",
             "Salg og kundeservice",
@@ -30,7 +31,7 @@ const questions = [
 
     {
         question: "Hva liker du best å jobbe med?",
-        type: "options",
+        type: "multiple",
         options: [
             "Mennesker og kundekontakt",
             "Data og teknologi",
@@ -41,7 +42,7 @@ const questions = [
 
     {
         question: "Hvordan liker du best å jobbe?",
-        type: "options",
+        type: "single",
         options: [
             "Sammen med andre",
             "Selvstendig",
@@ -52,7 +53,7 @@ const questions = [
 
     {
         question: "Hvilke ferdigheter mener du beskriver deg best?",
-        type: "options",
+        type: "multiple",
         options: [
             "Kommunikasjon",
             "Problemløsning",
@@ -68,7 +69,7 @@ const questions = [
 
     {
         question: "Hva er viktigst for deg på en praksisplass?",
-        type: "options",
+        type: "multiple",
         options: [
             "Å lære nye ferdigheter",
             "Et godt arbeidsmiljø",
@@ -84,7 +85,7 @@ const questions = [
 
     {
         question: "Hvor langt er du villig til å reise til praksisplassen?",
-        type: "options",
+        type: "single",
         options: [
             "Helst i nærområdet",
             "Opptil 30 minutter",
@@ -94,22 +95,33 @@ const questions = [
     }
 ];
 
+
+// ===============================
+// LAGRE SVAR
+// ===============================
+
 let currentQuestion = 0;
 
-// Her lagres svarene til eleven
 const answers = new Array(questions.length).fill(null);
 
 
-// Henter elementer fra quizz.html
+// ===============================
+// HENT HTML-ELEMENTER
+// ===============================
+
 const questionElement = document.getElementById("question");
 const answerOptions = document.getElementById("answerOptions");
 const questionCounter = document.getElementById("questionCounter");
 const progress = document.getElementById("progress");
 const nextButton = document.getElementById("nextButton");
 const previousButton = document.getElementById("previousButton");
+const answerInstruction = document.getElementById("answerInstruction");
 
 
-// Koden under kjøres bare hvis vi faktisk er på quiz-siden
+// ===============================
+// VIS QUIZ
+// ===============================
+
 if (
     questionElement &&
     answerOptions &&
@@ -123,56 +135,125 @@ if (
 
         const current = questions[currentQuestion];
 
-        // Viser spørsmålet
         questionElement.textContent = current.question;
 
-        // Oppdaterer "Spørsmål 1 av 8"
+        // Oppdater fremdrift
         questionCounter.textContent =
             `Spørsmål ${currentQuestion + 1} av ${questions.length}`;
 
-        // Oppdaterer fremdriftslinjen
-        const progressPercentage =
+        const percentage =
             ((currentQuestion + 1) / questions.length) * 100;
 
-        progress.style.width = progressPercentage + "%";
+        progress.style.width = percentage + "%";
 
-        // Tømmer gamle svar
+        // Fjern gamle svaralternativer
         answerOptions.innerHTML = "";
+
+        // Forklar om eleven kan velge flere
+        if (answerInstruction) {
+
+            if (current.type === "multiple") {
+                answerInstruction.textContent =
+                    "✓ Velg én eller flere alternativer";
+            }
+
+            else if (current.type === "single") {
+                answerInstruction.textContent =
+                    "Velg ett alternativ";
+            }
+
+            else {
+                answerInstruction.textContent =
+                    "Skriv svaret ditt nedenfor";
+            }
+        }
 
 
         // ===============================
         // SVARALTERNATIVER
         // ===============================
 
-        if (current.type === "options") {
+        if (
+            current.type === "multiple" ||
+            current.type === "single"
+        ) {
+
+            // Opprett en liste for flervalg
+            if (
+                current.type === "multiple" &&
+                !Array.isArray(answers[currentQuestion])
+            ) {
+                answers[currentQuestion] = [];
+            }
 
             current.options.forEach(function (option) {
 
                 const button = document.createElement("button");
 
+                button.type = "button";
                 button.classList.add("answer-button");
                 button.textContent = option;
 
-                // Hvis eleven allerede har valgt dette svaret
-                if (answers[currentQuestion] === option) {
+                // Gjenopprett valgte svar
+                let isSelected = false;
+
+                if (current.type === "multiple") {
+                    isSelected = answers[currentQuestion].includes(option);
+                } else {
+                    isSelected = answers[currentQuestion] === option;
+                }
+
+                if (isSelected) {
                     button.classList.add("selected");
                 }
 
+                button.setAttribute("aria-pressed", String(isSelected));
+
                 button.addEventListener("click", function () {
 
-                    // Fjerner selected fra alle andre
-                    const allButtons =
-                        document.querySelectorAll(".answer-button");
+                    if (current.type === "multiple") {
 
-                    allButtons.forEach(function (btn) {
-                        btn.classList.remove("selected");
-                    });
+                        const selectedAnswers = answers[currentQuestion];
 
-                    // Marker valgt knapp
-                    button.classList.add("selected");
+                        if (selectedAnswers.includes(option)) {
 
-                    // Lagre svaret
-                    answers[currentQuestion] = option;
+                            // Fjern svar ved nytt klikk
+                            answers[currentQuestion] =
+                                selectedAnswers.filter(function (answer) {
+                                    return answer !== option;
+                                });
+
+                            button.classList.remove("selected");
+
+                        } else {
+
+                            // Legg til enda et svar
+                            selectedAnswers.push(option);
+
+                            button.classList.add("selected");
+                        }
+
+                    } else {
+
+                        // Spørsmål der kun ett svar er tillatt
+                        answers[currentQuestion] = option;
+
+                        const allButtons =
+                            answerOptions.querySelectorAll(".answer-button");
+
+                        allButtons.forEach(function (btn) {
+                            btn.classList.remove("selected");
+                            btn.setAttribute("aria-pressed", "false");
+                        });
+
+                        button.classList.add("selected");
+                    }
+
+                    button.setAttribute(
+                        "aria-pressed",
+                        String(button.classList.contains("selected"))
+                    );
+
                 });
 
                 answerOptions.appendChild(button);
@@ -189,12 +270,9 @@ if (
             const textarea = document.createElement("textarea");
 
             textarea.classList.add("quiz-textarea");
+            textarea.placeholder = "Skriv svaret ditt her...";
 
-            textarea.placeholder =
-                "Skriv svaret ditt her...";
-
-            // Viser tidligere svar hvis eleven går tilbake
-            if (answers[currentQuestion]) {
+            if (typeof answers[currentQuestion] === "string") {
                 textarea.value = answers[currentQuestion];
             }
 
@@ -206,15 +284,16 @@ if (
         }
 
 
-        // Deaktiver tilbake på spørsmål 1
+        // ===============================
+        // NAVIGASJON
+        // ===============================
+
         previousButton.disabled = currentQuestion === 0;
 
-
-        // Endrer teksten på siste spørsmål
         if (currentQuestion === questions.length - 1) {
-            nextButton.textContent = "Fullfør quiz";
+            nextButton.textContent = "Fullfør quiz 🎉";
         } else {
-            nextButton.textContent = "Neste";
+            nextButton.textContent = "Neste →";
         }
     }
 
@@ -225,15 +304,18 @@ if (
 
     nextButton.addEventListener("click", function () {
 
-        // Sjekker at eleven har svart
-        if (
-            answers[currentQuestion] === null ||
-            answers[currentQuestion].trim() === ""
-        ) {
+        const answer = answers[currentQuestion];
+
+        // Sjekk at eleven har svart
+        const isEmpty =
+            answer === null ||
+            (Array.isArray(answer) && answer.length === 0) ||
+            (typeof answer === "string" && answer.trim() === "");
+
+        if (isEmpty) {
             alert("Velg eller skriv inn et svar før du går videre.");
             return;
         }
-
 
         if (currentQuestion < questions.length - 1) {
 
@@ -242,23 +324,26 @@ if (
 
         } else {
 
+            // Quiz ferdig
             console.log("Quiz ferdig!");
             console.log(answers);
 
-    // ===============================
-    // QUIZ FULLFØRT
-    // ===============================
+            // Lagre svarene
+            sessionStorage.setItem(
+                "quizAnswers",
+                JSON.stringify(answers)
+            );
 
-    const results = calculateMatches(answers);
+            // Beregn matching
+            const results = calculateMatches(answers);
 
-    // Lagre resultatene
-    sessionStorage.setItem(
-        "matchingResults",
-        JSON.stringify(results)
-    );
+            sessionStorage.setItem(
+                "matchingResults",
+                JSON.stringify(results)
+            );
 
-    // Gå tilbake til profilsiden
-    window.location.href = "index.html";
+            // Tilbake til Min side
+            window.location.href = "index.html";
         }
     });
 
@@ -273,217 +358,203 @@ if (
             currentQuestion--;
             showQuestion();
         }
-
     });
 
 
-    // Starter quizzen
     showQuestion();
 }
 
 
-
-   // ===============================
+// ===============================
 // BEREGN MATCHING
 // ===============================
 
 function calculateMatches(answers) {
 
-
-    // ===============================
-    // EKSEMPEL-PRAKSISPLASSER
-    // ===============================
-
+    // Eksempelbedrifter i prototypen
     const results = [
-
         {
             name: "Finanstilsynet",
             line: "IT og teknologi",
             location: "Oslo",
             match: 70
         },
-
         {
             name: "Forbrukerrådet",
             line: "IT og teknologi",
             location: "Oslo",
             match: 70
         },
-
         {
             name: "Elkjøp Nordic AS",
             line: "Salg og kundeservice",
             location: "Oslo",
             match: 70
         },
-
         {
             name: "Sopra Steria AS",
             line: "IT og teknologi",
             location: "Oslo",
             match: 70
         },
-
         {
             name: "Telia",
             line: "IT og teknologi",
             location: "Oslo",
             match: 70
         }
-
     ];
 
 
+    // Sjekker om et svar er valgt.
+    // Fungerer både med ett svar og flere svar.
+    function hasAnswer(questionIndex, value) {
+
+        const answer = answers[questionIndex];
+
+        if (Array.isArray(answer)) {
+            return answer.includes(value);
+        }
+
+        return answer === value;
+    }
+
+
     // ===============================
-    // SPØRSMÅL 1
-    // INTERESSEOMRÅDE
+    // SPØRSMÅL 1 - INTERESSER
     // ===============================
 
-    if (answers[0] === "IT og teknologi") {
-
+    if (hasAnswer(0, "IT og teknologi")) {
         results[0].match += 20;
-
         results[1].match += 15;
-
         results[3].match += 15;
-
         results[4].match += 10;
-
     }
 
-
-    if (answers[0] === "Salg og kundeservice") {
-
+    if (hasAnswer(0, "Salg og kundeservice")) {
         results[2].match += 20;
-
     }
 
-
-    // ===============================
-    // SPØRSMÅL 2
-    // HVA LIKER ELEVEN Å JOBBE MED?
-    // ===============================
-
-    if (answers[1] === "Data og teknologi") {
-
-        results[0].match += 10;
-
-        results[1].match += 10;
-
+    if (hasAnswer(0, "Design og kreativt arbeid")) {
         results[3].match += 10;
+        results[4].match += 5;
+    }
 
+    if (hasAnswer(0, "Helse og omsorg")) {
+        results[1].match += 5;
     }
 
 
-    if (answers[1] === "Mennesker og kundekontakt") {
+    // ===============================
+    // SPØRSMÅL 2 - ARBEIDSOPPGAVER
+    // ===============================
 
+    if (hasAnswer(1, "Data og teknologi")) {
+        results[0].match += 10;
+        results[1].match += 10;
+        results[3].match += 10;
+    }
+
+    if (hasAnswer(1, "Mennesker og kundekontakt")) {
         results[2].match += 10;
-
     }
 
-
-    // ===============================
-    // SPØRSMÅL 3
-    // ARBEIDSMÅTE
-    // ===============================
-
-    if (answers[2] === "Sammen med andre") {
-
-        results[0].match += 5;
-
-        results[2].match += 5;
-
-    }
-
-
-    // ===============================
-    // SPØRSMÅL 4
-    // FERDIGHETER
-    // ===============================
-
-    if (answers[3] === "Tekniske ferdigheter") {
-
-        results[0].match += 5;
-
-        results[1].match += 5;
-
+    if (hasAnswer(1, "Kreative oppgaver")) {
         results[3].match += 5;
-
     }
 
-
-    if (answers[3] === "Kommunikasjon") {
-
+    if (hasAnswer(1, "Praktiske oppgaver")) {
         results[2].match += 5;
-
-    }
-
-
-    if (answers[3] === "Problemløsning") {
-
-        results[0].match += 5;
-
-        results[1].match += 5;
-
     }
 
 
     // ===============================
-    // SPØRSMÅL 6
-    // HVA ER VIKTIGST?
+    // SPØRSMÅL 3 - ARBEIDSMÅTE
     // ===============================
 
-    if (answers[5] === "Å lære nye ferdigheter") {
-
+    if (hasAnswer(2, "Sammen med andre")) {
         results[0].match += 5;
+        results[2].match += 5;
+    }
 
+    if (hasAnswer(2, "Selvstendig")) {
         results[1].match += 5;
-
         results[3].match += 5;
-
-    }
-
-
-    if (answers[5] === "Et godt arbeidsmiljø") {
-
-        results[2].match += 5;
-
     }
 
 
     // ===============================
-    // MAKS 99%
+    // SPØRSMÅL 4 - FERDIGHETER
+    // ===============================
+
+    if (hasAnswer(3, "Tekniske ferdigheter")) {
+        results[0].match += 5;
+        results[1].match += 5;
+        results[3].match += 5;
+    }
+
+    if (hasAnswer(3, "Kommunikasjon")) {
+        results[2].match += 5;
+    }
+
+    if (hasAnswer(3, "Problemløsning")) {
+        results[0].match += 5;
+        results[1].match += 5;
+    }
+
+    if (hasAnswer(3, "Kreativitet")) {
+        results[3].match += 5;
+    }
+
+
+    // ===============================
+    // SPØRSMÅL 6 - VIKTIGST I PRAKSIS
+    // ===============================
+
+    if (hasAnswer(5, "Å lære nye ferdigheter")) {
+        results[0].match += 5;
+        results[1].match += 5;
+        results[3].match += 5;
+    }
+
+    if (hasAnswer(5, "Et godt arbeidsmiljø")) {
+        results[2].match += 5;
+    }
+
+    if (hasAnswer(5, "Oppgaver som passer interessene mine")) {
+        results[3].match += 5;
+        results[4].match += 5;
+    }
+
+    if (hasAnswer(5, "Mulighet for videre jobb")) {
+        results[2].match += 5;
+        results[4].match += 5;
+    }
+
+
+    // ===============================
+    // MAKS 99% MATCH
     // ===============================
 
     results.forEach(function (place) {
-
-        if (place.match > 99) {
-
-            place.match = 99;
-
-        }
-
+        place.match = Math.min(99, place.match);
     });
 
 
     // ===============================
-    // SORTER HØYEST MATCH FØRST
+    // SORTER RESULTATENE
     // ===============================
 
     results.sort(function (a, b) {
-
         return b.match - a.match;
-
     });
 
-
     return results;
-
 }
 
 
 // ===============================
-// VIS RESULTATER PÅ PROFILSIDE
+// VIS RESULTATER PÅ MIN SIDE
 // ===============================
 
 const resultsContainer =
@@ -493,98 +564,86 @@ if (resultsContainer) {
 
     const savedResults =
         sessionStorage.getItem("matchingResults");
-        
-        // Hvis quizzen nettopp er fullført
 
-if (savedResults) {
+    if (savedResults) {
 
-    const results = JSON.parse(savedResults);
+        const results = JSON.parse(savedResults);
 
-    resultsContainer.innerHTML = "";
+        resultsContainer.innerHTML = "";
 
-    results.forEach(function (place) {
+        results.forEach(function (place) {
 
-        const resultCard = document.createElement("div");
+            const resultCard = document.createElement("div");
 
-        resultCard.classList.add("result-card");
+            resultCard.classList.add("result-card");
 
-        resultCard.innerHTML = `
+            resultCard.innerHTML = `
 
-            <div class="result-top">
+                <div class="result-top">
 
-                <span class="type-badge praksis">
-                    🎓 Praksisplass
-                </span>
+                    <span class="type-badge praksis">
+                        🎓 Praksisplass
+                    </span>
 
-                <span class="match-badge">
-                    ${place.match}% match
-                </span>
+                    <span class="match-badge">
+                        ${place.match}% match
+                    </span>
 
-            </div>
-
-            <div class="result-info">
-
-                <h3>${place.name}</h3>
-
-                <p class="result-line">
-                    ${place.line}
-                </p>
-
-                <p class="result-location">
-                    📍 ${place.location}
-                </p>
-
-            </div>
-
-            <div class="match-info">
-
-                <div class="match-text">
-                    <strong>${place.match}%</strong>
-                    <span>match</span>
                 </div>
 
-                <div class="match-bar">
-                    <div
-                        class="match-progress"
-                        style="width: ${place.match}%">
+                <div class="result-info">
+
+                    <h3>${place.name}</h3>
+
+                    <p class="result-line">
+                        ${place.line}
+                    </p>
+
+                    <p class="result-location">
+                        📍 ${place.location}
+                    </p>
+
+                </div>
+
+                <div class="match-info">
+
+                    <div class="match-text">
+                        <strong>${place.match}%</strong>
+                        <span>match</span>
                     </div>
+
+                    <div class="match-bar">
+                        <div
+                            class="match-progress"
+                            style="width: ${place.match}%">
+                        </div>
+                    </div>
+
                 </div>
 
-            </div>
+                <div class="result-actions">
 
-            <div class="result-actions">
+                    <button
+                        class="read-more-button"
+                        onclick="alert('Mer informasjon om ${place.name}')">
+                        Les mer
+                    </button>
 
-                <button
-                    class="read-more-button"
-                    onclick="alert('Mer informasjon om ${place.name}')">
-                    Les mer
-                </button>
+                    <a href="messages.html?company=${encodeURIComponent(place.name)}"
+                    class="contact-button">
+                     💬 Kontakt bedriften
+                    </a>
 
-                <a href="messages.html" class="contact-button">
-                    💬 Kontakt bedriften
-                </a>
+                </div>
 
-            </div>
+            `;
 
-        `;
-
-        resultsContainer.appendChild(resultCard);
-
-    });
-
-}
-
-
-        // Fjern resultatene etter at de er vist
-        // ved neste lasting av siden
-        sessionStorage.removeItem("matchingResults");
-
+            resultsContainer.appendChild(resultCard);
+        });
 
     } else {
 
-        // Ingen quiz-resultater
         resultsContainer.innerHTML = "";
 
     }
-
 }
