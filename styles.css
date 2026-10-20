@@ -122,6 +122,7 @@ body {
     color: #334155;
 }
 
+
 .skills {
     display: flex;
     flex-wrap: wrap;
@@ -129,7 +130,7 @@ body {
 }
 
 .skills span {
-    background: #e3eef8;
+    background: #d2e1ee;
     color: #315f86;
     padding: 8px 12px;
     border-radius: 20px;
@@ -170,6 +171,39 @@ button, .primary-button { font-family: inherit; }
 .edit-button:hover { background: #c8deee; }
 
 /* MATCHING QUIZ PÅ FORSIDEN */
+
+.quiz-highlight-text {
+    background-color: #FAF7FF;
+    padding: 25px;
+    border-radius: 12px;
+}
+
+
+.quiz-main-button {
+    display: inline-block;
+    background-color: #956fd1;
+    color: #FFFFFF;
+    padding: 12px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.quiz-main-button:hover {
+    background-color: #56358C;
+}
+
+.quiz-icon {
+    font-size: 35px;
+    background: transparent;
+    padding: 0;
+    border-radius: 0;
+    min-width: auto;
+    min-height: auto;
+    flex-shrink: 0;
+}
+
+
 .quiz-card {
     display: flex;
     justify-content: space-between;
@@ -392,7 +426,7 @@ button, .primary-button { font-family: inherit; }
 
 .read-more-button {
     border: 0;
-    background: #222;
+    background:#315f86;
     color: #fff;
     padding: 10px 18px;
     border-radius: 7px;

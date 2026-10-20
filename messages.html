@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meldinger</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="toppbar">
+        <button class="menu-button" id="menuButton">☰</button>
+        <h1>Matching app for Bjørnholt vgs</h1>
+    </header>
+    <nav class="side-menu" id="sideMenu">
+        <a href="index.html">🏠 Min side</a>
+        <a href="quiz.html">🎯 Matching quiz</a>
+        <a href="applications.html">📄 Mine søknader</a>
+        <a href="messages.html">💬 Meldinger</a>
+        <a href="#">🚪 Logg ut</a>
+    </nav>
+    <main class="dashboard">
+        <section class="profile-card">
+            <h2>Meldinger</h2>
+            
+            <p><strong>Elkjøp</strong></p>
+            <p>
+                Hei! Takk for interessen din for praksisplass hos oss.
+                Vi ønsker gjerne å avtale et digitalt intervju med deg.
+                Hvilken dag passer best?
+            </p>
+            <form>
+                <label for="svar"></label>
+                <textarea
+                    id="svar"
+                    name="svar"
+                    rows="5"
+                    placeholder="Svar på meldingen ..."
+                ></textarea>
+                <button type="button">Send svar</button>
+            </form>
+        </section>
+        <section class="profile-card">
+            <h2>Digitalt intervju</h2>
+            <p>
+                Når du og bedriften har avtalt et tidspunkt,
+                kan dere møtes digitalt her.
+            </p>
+            <p><strong>Status:</strong> Ikke avtalt ennå</p>
+            <button type="button">
+                Bli med i intervju
+            </button>
+        </section>
+    </main>
+</body>
+</html>

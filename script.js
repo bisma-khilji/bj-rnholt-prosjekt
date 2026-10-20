@@ -560,7 +560,7 @@ if (resultsContainer) {
                     class="read-more-button"
                     onclick="alert('Mer informasjon om ${place.name}')">
 
-                    Les mer
+                    Utdanning.no
 
                 </button>
 
